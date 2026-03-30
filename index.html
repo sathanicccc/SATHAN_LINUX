@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SATHAN LINUX | SYSTEM ROOT</title>
-    <link rel="manifest" href="manifest.json">
+    <title>SATHAN LINUX | BLACK & GREEN v5.0</title>
+    
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
 </head>
 <body>
-    <canvas id="matrix-bg"></canvas>
-
     <div class="webos-container">
         <div class="top-bar">
             <div class="left">
@@ -19,34 +20,59 @@
             <div class="right"><span id="sys-clock"></span></div>
         </div>
 
-        <div class="desktop-icons">
-            <div class="icon-box" onclick="openTool('term-win')">
-                <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="Terminal">
-                <span>Terminal</span>
-            </div>
-            <div class="icon-box" onclick="openTool('bomb-win')">
-                <img src="https://cdn-icons-png.flaticon.com/512/564/564445.png" alt="Bomber">
-                <span>OTP Bomber</span>
-            </div>
-            <div class="icon-box" onclick="openTool('cam-win')">
-                <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="Cam">
-                <span>Cam Hack</span>
-            </div>
-            <div class="icon-box" onclick="openTool('loc-win')">
-                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Track">
-                <span>IP Tracker</span>
-            </div>
-            <div class="icon-box" onclick="openTool('db-win')">
-                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Database">
-                <span>DB Leak</span>
+        <canvas id="matrix-bg"></canvas>
+
+        <div class="desktop-interface">
+            <div class="desktop-icons">
+                <div class="icon-box" onclick="openTool('term-win')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="Terminal">
+                    <span>Terminal</span>
+                </div>
+                <div class="icon-box" onclick="openTool('bomb-win')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/564/564445.png" alt="Bomber">
+                    <span>OTP Bomber</span>
+                </div>
+                <div class="icon-box" onclick="openTool('cam-win')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="Cam">
+                    <span>Cam Hack</span>
+                </div>
+                <div class="icon-box" onclick="openTool('loc-win')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Track">
+                    <span>IP Tracker</span>
+                </div>
+                <div class="icon-box" onclick="openTool('db-win')">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Database">
+                    <span>DB Leak</span>
+                </div>
+
+                <div class="icon-box" onclick="openTool('msf-win')">
+                    <img src="assets/msf_icon.png" alt="Metasploit">
+                    <span>Metasploit.io</span>
+                </div>
+                <div class="icon-box" onclick="openTool('phish-win')">
+                    <img src="assets/phish_icon.png" alt="Phishing">
+                    <span>Credential.Harvester</span>
+                </div>
+                <div class="icon-box" onclick="openTool('dos-win')">
+                    <img src="assets/ddos_icon.png" alt="DoS">
+                    <span>DoS.Controller</span>
+                </div>
+                <div class="icon-box" onclick="openTool('kbd-win')">
+                    <img src="assets/kbd_icon.png" alt="Keylogger">
+                    <span>Keylogger</span>
+                </div>
+                <div class="icon-box" onclick="openTool('botnet-win')">
+                    <img src="assets/botnet_icon.png" alt="Botnet">
+                    <span>Botnet Manager</span>
+                </div>
             </div>
         </div>
 
         <div id="window-layer">
-            <div class="window" id="term-win" style="display:block;">
+            
+            <div class="window terminal-window" id="term-win" style="display:block;">
                 <div class="win-header"><span>kali@sathan: ~</span><span class="close" onclick="closeTool('term-win')">X</span></div>
                 <div class="win-body term-body">
-                    <p class="red-text">WARNING: SYSTEM BREACH DETECTED...</p>
                     <div id="cmd-history"></div>
                     <div class="input-line"><span>$</span><input type="text" id="user-input" autofocus></div>
                 </div>
@@ -60,6 +86,49 @@
                     <div class="log" id="bomb-log"></div>
                 </div>
             </div>
+
+            <div class="window metasploit-window" id="msf-win">
+                <div class="win-header"><span>Metasploit.io Framework Console</span><span class="close" onclick="closeTool('msf-win')">X</span></div>
+                <div class="win-body" id="msf-output">
+                    </div>
+            </div>
+
+            <div class="window credential-window" id="phish-win">
+                <div class="win-header"><span>Credential.Harvester - Log in</span><span class="close" onclick="closeTool('phish-win')">X</span></div>
+                <div class="win-body">
+                    <div class="phish-form">
+                        <input type="text" id="fake-user" placeholder="Username or email">
+                        <input type="password" id="fake-pass" placeholder="Password">
+                        <button class="hack-btn" onclick="fakePhish()">Log in</button>
+                        <p class="red-text" id="phish-status"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="window" id="dos-win">
+                <div class="win-header"><span>DoS.Controller (DDoS)</span><span class="close" onclick="closeTool('dos-win')">X</span></div>
+                <div class="win-body">
+                    <button class="hack-btn" id="dos-btn" onclick="fakeDoS()">START FLOOD</button>
+                    <div class="fake-bar-container"><div class="fake-bar" id="dos-bar"></div></div>
+                </div>
+            </div>
+
+            <div class="window" id="kbd-win">
+                <div class="win-header"><span>Keylogger (Active Stream)</span><span class="close" onclick="closeTool('kbd-win')">X</span></div>
+                <div class="win-body" id="kbd-log">
+                    <p class="white-text">[Listening...]</p>
+                </div>
+            </div>
+
+            <div class="window" id="botnet-win">
+                <div class="win-header"><span>Botnet Manager (v1.1)</span><span class="close" onclick="closeTool('botnet-win')">X</span></div>
+                <div class="win-body">
+                    <p>Bots Connected: <span id="bot-count">0</span>/512</p>
+                    <button class="hack-btn" onclick="fakeBotConnect()">DEPLOY ZOMBIES</button>
+                    <div id="bot-log" class="log"></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
