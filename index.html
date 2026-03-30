@@ -3,75 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SATHAN LINUX | BLACK & GREEN</title>
-    
+    <title>SATHAN LINUX | SYSTEM ROOT</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <canvas id="matrix-bg"></canvas>
+
     <div class="webos-container">
         <div class="top-bar">
             <div class="left">
-                <img src="https://raw.githubusercontent.com/sathanicccc/Welcome-To-My-World-/main/icon.png" alt="SATHAN LOGO" class="sys-logo">
-                <span>SATHAN LINUX OS</span>
+                <img src="https://i.ibb.co/FLbGXbDR/1000011961.jpg" alt="LOGO" class="sys-logo">
+                <span class="glitch" data-text="SATHAN LINUX">SATHAN LINUX</span>
             </div>
-            <div class="right">
-                <span id="sys-clock"></span>
+            <div class="right"><span id="sys-clock"></span></div>
+        </div>
+
+        <div class="desktop-icons">
+            <div class="icon-box" onclick="openTool('term-win')">
+                <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" alt="Terminal">
+                <span>Terminal</span>
+            </div>
+            <div class="icon-box" onclick="openTool('bomb-win')">
+                <img src="https://cdn-icons-png.flaticon.com/512/564/564445.png" alt="Bomber">
+                <span>OTP Bomber</span>
+            </div>
+            <div class="icon-box" onclick="openTool('cam-win')">
+                <img src="https://cdn-icons-png.flaticon.com/512/4812/4812397.png" alt="Cam">
+                <span>Cam Hack</span>
+            </div>
+            <div class="icon-box" onclick="openTool('loc-win')">
+                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Track">
+                <span>IP Tracker</span>
+            </div>
+            <div class="icon-box" onclick="openTool('db-win')">
+                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Database">
+                <span>DB Leak</span>
             </div>
         </div>
 
-        <div class="workspace">
-            <div class="window terminal-window" id="term-win">
-                <div class="win-header">
-                    <span class="dots red" onclick="toggleWindow('term-win')"></span>
-                    <span class="title">kali@sathan-linux: ~</span>
-                </div>
-                <div class="win-body" id="term-output">
-                    <pre class="ascii-art">
-   _____       _______ _    _          _   _ 
-  / ____|   /\|__   __| |  | |   /\   | \ | |
- | (___    /  \  | |  | |__| |  /  \  |  \| |
-  \___ \  / /\ \ | |  |  __  | / /\ \ | . ` |
-  ____) |/ ____ \| |  | |  | |/ ____ \| |\  |
- |_____//_/    \_\_|  |_|  |_/_/    \_\_| \_|
- <span style="color:white">BLACK & GREEN | v4.0 Admin</span>
-                    </pre>
-                    <p class="green-text">Sathan Kernel 6.1-amd64 Loaded. Status: OK.</p>
-                    <p class="white-text">Type 'tools' to open Hacking Panel, 'help' for info.</p>
+        <div id="window-layer">
+            <div class="window" id="term-win" style="display:block;">
+                <div class="win-header"><span>kali@sathan: ~</span><span class="close" onclick="closeTool('term-win')">X</span></div>
+                <div class="win-body term-body">
+                    <p class="red-text">WARNING: SYSTEM BREACH DETECTED...</p>
                     <div id="cmd-history"></div>
-                    <div class="input-line">
-                        <span class="prompt">kali@sathan:~$</span>
-                        <input type="text" id="user-input" autofocus autocomplete="off">
-                    </div>
+                    <div class="input-line"><span>$</span><input type="text" id="user-input" autofocus></div>
                 </div>
             </div>
 
-            <div class="window tool-window" id="tool-win" style="display:none;">
-                <div class="win-header">
-                    <span class="dots yellow" onclick="toggleWindow('tool-win')"></span>
-                    <span class="title">SATHAN TOOLKIT</span>
-                </div>
-                <div class="win-body tool-body">
-                    <h3>OTP BOMBER (FUN)</h3>
-                    <input type="number" id="target" placeholder="Target 10-digit Number" maxlength="10">
-                    <input type="number" id="count" placeholder="Limit (Max 50)">
-                    <button class="action-btn bomb-btn" onclick="startBombing()">START ATTACK</button>
-                    
-                    <hr color="#0f0">
-                    
-                    <h3>OTHER TOOLS</h3>
-                    <div class="extra-tools">
-                        <button class="action-btn" onclick="trackIP()">IP TRACK</button>
-                        <button class="action-btn" onclick="portScan()">PORT SCAN</button>
-                    </div>
-                    
-                    <div id="op-status"></div>
+            <div class="window" id="bomb-win">
+                <div class="win-header"><span>BOMBER EXPLOIT</span><span class="close" onclick="closeTool('bomb-win')">X</span></div>
+                <div class="win-body">
+                    <input type="number" id="target" placeholder="Phone Number">
+                    <button class="hack-btn" onclick="runBomb()">INJECT PACKETS</button>
+                    <div class="log" id="bomb-log"></div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="error-overlay">SYSTEM COMPROMISED!</div>
+
     <script src="script.js"></script>
     <script src="tools.js"></script>
 </body>
