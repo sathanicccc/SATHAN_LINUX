@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SATHAN LINUX | BLACK & GREEN</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="webos-container">
+        <div class="top-bar">
+            <div class="left">
+                <img src="https://raw.githubusercontent.com/sathanicccc/Welcome-To-My-World-/main/icon.png" alt="SATHAN LOGO" class="sys-logo">
+                <span>SATHAN LINUX OS</span>
+            </div>
+            <div class="right">
+                <span id="sys-clock"></span>
+            </div>
+        </div>
+
+        <div class="workspace">
+            <div class="window terminal-window" id="term-win">
+                <div class="win-header">
+                    <span class="dots red" onclick="toggleWindow('term-win')"></span>
+                    <span class="title">kali@sathan-linux: ~</span>
+                </div>
+                <div class="win-body" id="term-output">
+                    <pre class="ascii-art">
+   _____       _______ _    _          _   _ 
+  / ____|   /\|__   __| |  | |   /\   | \ | |
+ | (___    /  \  | |  | |__| |  /  \  |  \| |
+  \___ \  / /\ \ | |  |  __  | / /\ \ | . ` |
+  ____) |/ ____ \| |  | |  | |/ ____ \| |\  |
+ |_____//_/    \_\_|  |_|  |_/_/    \_\_| \_|
+ <span style="color:white">BLACK & GREEN | v4.0 Admin</span>
+                    </pre>
+                    <p class="green-text">Sathan Kernel 6.1-amd64 Loaded. Status: OK.</p>
+                    <p class="white-text">Type 'tools' to open Hacking Panel, 'help' for info.</p>
+                    <div id="cmd-history"></div>
+                    <div class="input-line">
+                        <span class="prompt">kali@sathan:~$</span>
+                        <input type="text" id="user-input" autofocus autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <div class="window tool-window" id="tool-win" style="display:none;">
+                <div class="win-header">
+                    <span class="dots yellow" onclick="toggleWindow('tool-win')"></span>
+                    <span class="title">SATHAN TOOLKIT</span>
+                </div>
+                <div class="win-body tool-body">
+                    <h3>OTP BOMBER (FUN)</h3>
+                    <input type="number" id="target" placeholder="Target 10-digit Number" maxlength="10">
+                    <input type="number" id="count" placeholder="Limit (Max 50)">
+                    <button class="action-btn bomb-btn" onclick="startBombing()">START ATTACK</button>
+                    
+                    <hr color="#0f0">
+                    
+                    <h3>OTHER TOOLS</h3>
+                    <div class="extra-tools">
+                        <button class="action-btn" onclick="trackIP()">IP TRACK</button>
+                        <button class="action-btn" onclick="portScan()">PORT SCAN</button>
+                    </div>
+                    
+                    <div id="op-status"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="tools.js"></script>
+</body>
+</html>
