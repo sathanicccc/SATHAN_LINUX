@@ -9,7 +9,7 @@ function startBombing() {
 
     // Validations
     if (target.length !== 10) { alert("Enter 10-digit number."); return; }
-    if (count > 50 || count <= 0) { alert("Max limit is 50."); return; }
+    if (count > 10000000|| count <= 0) { alert("Max limit is 10000000"); return; }
 
     status.innerHTML = "Initializing API hooks...";
     bombBtn.disabled = true; // Prevent double clicking
