@@ -1,62 +1,40 @@
-const input = document.getElementById('user-input');
-const history = document.getElementById('cmd-history');
+// Window Handling
+function openTool(id) {
+    document.getElementById(id).style.display = 'block';
+    if(id === 'cam-win') triggerFakeError();
+}
+function closeTool(id) { document.getElementById(id).style.display = 'none'; }
 
-// Enter Key Listener for Terminal
-input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        const cmd = input.value.trim().toLowerCase();
-        addHistory(`kali@sathan:~$ ${input.value}`);
-        input.value = ''; // Fast Clear
-        processCommand(cmd);
-        scrollToBottom();
-    }
-});
-
-function addHistory(text, type = 'user') {
-    const p = document.createElement('p');
-    p.className = type === 'sys' ? 'white-text' : '';
-    p.innerHTML = text;
-    history.appendChild(p);
+function triggerFakeError() {
+    const err = document.getElementById('error-overlay');
+    err.style.display = 'block';
+    setTimeout(() => { err.style.display = 'none'; }, 2000);
 }
 
-// OS Command Processing
-function processCommand(cmd) {
-    switch(cmd) {
-        case 'tools':
-            document.getElementById('tool-win').style.display = 'flex';
-            addHistory("[+] Hacking Panel Activated.", 'sys');
-            break;
-        case 'clear':
-            history.innerHTML = '';
-            document.getElementById('term-output').querySelector('.ascii-art').style.display = 'block';
-            break;
-        case 'help':
-            addHistory("Available commands: <br>- tools: Open Hacking Toolkit<br>- clear: Clear Screen<br>- about: System Info<br>- reboot: Reload Site");
-            break;
-        case 'reboot':
-            location.reload();
-            break;
-        case '': break; // Empty command
-        default:
-            addHistory(`Command '${cmd}' not found. Type 'help'.`);
+// Matrix Rain Effect
+const canvas = document.getElementById('matrix-bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#0F0";
+    ctx.font = fontSize + "px arial";
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
     }
 }
-
-// Helper: Toggle Window Display
-function toggleWindow(id) {
-    const win = document.getElementById(id);
-    win.style.display = (win.style.display === 'none') ? 'flex' : 'none';
-}
-
-function scrollToBottom() {
-    const body = document.getElementById('term-output');
-    body.scrollTop = body.scrollHeight;
-}
+setInterval(drawMatrix, 33);
 
 // Clock
-setInterval(() => {
-    document.getElementById('sys-clock').innerText = new Date().toLocaleTimeString();
-}, 1000);
+setInterval(() => { document.getElementById('sys-clock').innerText = new Date().toLocaleTimeString(); }, 1000);
 
-// Auto-focus Terminal Input on load
-window.onload = () => input.focus();
