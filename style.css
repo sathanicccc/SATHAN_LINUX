@@ -1,30 +1,65 @@
-:root { --green: #00FF00; --red: #FF0000; --black: #000; }
-* { box-sizing: border-box; font-family: 'Courier New', monospace; }
-body { background: var(--black); margin: 0; color: var(--green); height: 100vh; overflow: hidden; }
+:root { --green: #00FF00; --win-border: #008000; --red: #FF0000; --black: #000; }
+* { box-sizing: border-box; font-family: 'Courier New', monospace; margin: 0; padding: 0; }
+body { background: var(--black); color: var(--green); height: 100vh; overflow: hidden; }
 
-/* Desktop Background Matrix */
+/* Matrix Rain Background (Optional but recommended) */
 #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.3; }
 
-.top-bar { background: #111; padding: 5px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--green); }
-.sys-logo { height: 25px; vertical-align: middle; border-radius: 50%; border: 1px solid var(--green); }
+/* Top System Bar */
+.top-bar { background: #111; padding: 5px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--green); z-index: 100; height: 35px; }
+.sys-logo { height: 25px; width: 25px; vertical-align: middle; border-radius: 50%; border: 1px solid var(--green); }
+.sys-clock { font-size: 14px; }
 
-/* Desktop Icons */
-.desktop-icons { display: grid; grid-template-columns: repeat(3, 100px); gap: 25px; padding: 30px; }
-.icon-box { text-align: center; cursor: pointer; transition: 0.3s; }
+/* Glitch Effect */
+.glitch { position: relative; color: white; text-shadow: 0 0 5px var(--green); font-weight: bold; font-size: 16px; }
+.glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.glitch::before { left: 2px; text-shadow: -2px 0 red; clip: rect(44px, 450px, 56px, 0); animation: glitch-anim 5s infinite linear alternate-reverse; }
+.glitch::after { left: -2px; text-shadow: -2px 0 blue; clip: rect(85px, 450px, 140px, 0); animation: glitch-anim 3s infinite linear alternate-reverse; }
+@keyframes glitch-anim { 0% { clip: rect(51px, 9999px, 28px, 0); } 100% { clip: rect(70px, 9999px, 86px, 0); } }
+
+/* Desktop Icon Grid */
+.desktop-interface { display: flex; height: calc(100vh - 35px); justify-content: center; align-items: start; padding: 30px; position: relative; z-index: 5;}
+.desktop-icons { display: grid; grid-template-columns: repeat(3, 110px); gap: 20px; text-align: center;}
+.icon-box { cursor: pointer; transition: 0.2s; }
 .icon-box:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--green)); }
-.icon-box img { width: 50px; height: 50px; display: block; margin: 0 auto 5px; }
-.icon-box span { font-size: 11px; font-weight: bold; }
+.icon-box img { width: 60px; height: 60px; display: block; margin: 0 auto 5px; }
+.icon-box span { font-size: 11px; font-weight: bold; color: var(--green); text-shadow: 0 0 5px var(--green); display: block;}
 
-/* Windows */
-.window { position: absolute; top: 20%; left: 10%; width: 80%; max-width: 500px; background: rgba(0,0,0,0.9); border: 1px solid var(--green); box-shadow: 0 0 20px var(--green); display: none; z-index: 10; }
-.win-header { background: var(--green); color: #000; padding: 5px 10px; display: flex; justify-content: space-between; font-weight: bold; }
-.win-body { padding: 15px; height: 250px; overflow-y: auto; }
-.close { cursor: pointer; background: red; color: white; padding: 0 5px; }
+/* Windows System */
+.window { position: absolute; top: 20%; left: 10%; width: 80%; max-width: 500px; background: rgba(0,0,0,0.95); border: 1px solid var(--win-border); box-shadow: 0 0 25px rgba(0,255,0,0.25); display: none; z-index: 100; overflow: hidden;}
+.win-header { background: #222; color: white; padding: 5px 10px; display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; border-bottom: 1px solid var(--win-border); }
+.win-body { padding: 15px; height: 280px; overflow-y: auto; color: var(--green); }
+.close { cursor: pointer; background: red; color: white; padding: 0 5px; font-weight: bold; font-size: 16px;}
 
-/* Hacking Elements */
-input { background: transparent; border: 1px solid var(--green); color: #fff; width: 100%; padding: 8px; margin-bottom: 10px; }
-.hack-btn { background: var(--green); color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; }
-.log { font-size: 10px; margin-top: 10px; color: #aaa; height: 100px; overflow-y: scroll; border: 1px solid #222; }
+/* Inputs, Buttons, Logs */
+input { background: transparent; border: 1px solid var(--win-border); color: #fff; width: 100%; padding: 8px; margin-bottom: 10px; font-family: monospace;}
+input:focus { border-color: var(--green); outline: none; box-shadow: 0 0 5px var(--green); }
+.hack-btn { background: var(--green); color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; text-shadow: 0 0 3px #000;}
+.hack-btn:hover { background: #fff; box-shadow: 0 0 10px #0f0; }
+.hack-btn:disabled { background: #444; color: #aaa; cursor: not-allowed;}
+.log { font-size: 10px; margin-top: 10px; color: #aaa; height: 130px; overflow-y: scroll; border: 1px solid #222; text-align: left;}
 
-#error-overlay { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: var(--red); display: none; text-shadow: 0 0 15px var(--red); pointer-events: none; }
+/* Colors */
+.white-text { color: #ffffff; }
+.red-text { color: var(--red); font-weight: bold; }
+
+/* [NEW] Metasploit Window */
+.metasploit-window { max-width: 600px; height: 400px; font-size: 11px; color: #eee;}
+.metasploit-window .win-body { height: 360px; background: #000; text-align: left; }
+.msf-dragon { color: var(--green); font-size: 14px; font-weight: bold; text-shadow: 0 0 10px #0f0; }
+.msf-prompt { color: cyan; }
+
+/* [NEW] Phishing form */
+.credential-window { border-color: #f00; box-shadow: 0 0 20px #f00; max-width: 350px;}
+.credential-window .win-header { background: #f00; color: white; }
+.phish-form { text-align: center; }
+.phish-form input { color: #000; background: #eee; border-color: #ccc; }
+.phish-form .hack-btn { background: #337ab7; color: white; width: 100%; margin-top: 5px;}
+
+/* [NEW] DoS Fake bar */
+.fake-bar-container { background: #222; border: 1px solid #444; width: 100%; height: 20px; margin-top: 10px;}
+.fake-bar { background: var(--red); width: 0%; height: 100%; transition: 0.1s;}
+
+/* Scary Error Overlay */
+#error-overlay { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: var(--red); display: none; text-shadow: 0 0 25px var(--red); pointer-events: none; z-index: 1000; text-transform: uppercase; }
 
