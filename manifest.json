@@ -1,0 +1,20 @@
+{
+  "name": "SATHAN LINUX BLACK AND GREEN",
+  "short_name": "SathanOS",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00FF00",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/sathanicccc/Welcome-To-My-World-/main/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+    ,{
+      "src": "https://raw.githubusercontent.com/sathanicccc/Welcome-To-My-World-/main/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
