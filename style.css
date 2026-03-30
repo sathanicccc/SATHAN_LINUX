@@ -1,39 +1,30 @@
-:root { --main-green: #00FF00; --bg-black: #000000; --win-bg: rgba(10, 10, 10, 0.95); --win-border: #008000; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg-black); color: var(--main-green); font-family: 'Courier New', monospace; height: 100vh; overflow: hidden; }
+:root { --green: #00FF00; --red: #FF0000; --black: #000; }
+* { box-sizing: border-box; font-family: 'Courier New', monospace; }
+body { background: var(--black); margin: 0; color: var(--green); height: 100vh; overflow: hidden; }
 
-/* Top Bar */
-.top-bar { background: #111; border-bottom: 1px solid var(--main-green); padding: 5px 15px; display: flex; justify-content: space-between; align-items: center; height: 35px; }
-.left { display: flex; align-items: center; gap: 8px; }
-.sys-logo { height: 20px; width: 20px; }
-.sys-clock { font-size: 14px; }
+/* Desktop Background Matrix */
+#matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.3; }
 
-/* Workspace & Windows */
-.workspace { display: flex; height: calc(100vh - 35px); padding: 10px; gap: 10px; position: relative; }
-.window { background: var(--win-bg); border: 1px solid var(--win-border); box-shadow: 0 0 15px rgba(0,255,0,0.2); border-radius: 5px; position: absolute; overflow: hidden; display: flex; flex-direction: column; }
-.terminal-window { width: 60%; height: 90%; left: 10px; }
-.tool-window { width: 35%; height: 80%; right: 10px; }
+.top-bar { background: #111; padding: 5px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--green); }
+.sys-logo { height: 25px; vertical-align: middle; border-radius: 50%; border: 1px solid var(--green); }
 
-/* Android Mobile Compatibility: stack windows if screen is small */
-@media (max-width: 768px) {
-  .terminal-window, .tool-window { width: 95%; height: 48%; position: static; margin-bottom: 10px; }
-  .workspace { flex-direction: column; overflow-y: auto; }
-}
+/* Desktop Icons */
+.desktop-icons { display: grid; grid-template-columns: repeat(3, 100px); gap: 25px; padding: 30px; }
+.icon-box { text-align: center; cursor: pointer; transition: 0.3s; }
+.icon-box:hover { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--green)); }
+.icon-box img { width: 50px; height: 50px; display: block; margin: 0 auto 5px; }
+.icon-box span { font-size: 11px; font-weight: bold; }
 
-.win-header { background: #222; padding: 8px; display: flex; align-items: center; border-bottom: 1px solid var(--win-border); cursor: move; }
-.dots { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; margin-right: 8px; }
-.red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-.title { color: #fff; font-size: 13px; text-shadow: 0 0 5px #0f0; margin-left: 10px;}
+/* Windows */
+.window { position: absolute; top: 20%; left: 10%; width: 80%; max-width: 500px; background: rgba(0,0,0,0.9); border: 1px solid var(--green); box-shadow: 0 0 20px var(--green); display: none; z-index: 10; }
+.win-header { background: var(--green); color: #000; padding: 5px 10px; display: flex; justify-content: space-between; font-weight: bold; }
+.win-body { padding: 15px; height: 250px; overflow-y: auto; }
+.close { cursor: pointer; background: red; color: white; padding: 0 5px; }
 
-.win-body { padding: 15px; flex: 1; overflow-y: auto; scrollbar-width: thin; }
-.ascii-art { font-size: 8px; white-space: pre; line-height: 1.1; margin-bottom: 10px; color: var(--main-green); text-shadow: 0 0 8px #0f0; }
+/* Hacking Elements */
+input { background: transparent; border: 1px solid var(--green); color: #fff; width: 100%; padding: 8px; margin-bottom: 10px; }
+.hack-btn { background: var(--green); color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; }
+.log { font-size: 10px; margin-top: 10px; color: #aaa; height: 100px; overflow-y: scroll; border: 1px solid #222; }
 
-/* Inputs & Buttons */
-.input-line { display: flex; gap: 5px; }
-input { background: transparent; border: 1px solid #333; color: #fff; outline: none; padding: 5px; font-family: monospace; }
-input:focus { border-color: var(--main-green); }
-.action-btn { background: #000; border: 1px solid var(--main-green); color: var(--main-green); padding: 8px 15px; cursor: pointer; font-weight: bold; transition: 0.2s; text-shadow: 0 0 5px #0f0;}
-.action-btn:hover { background: var(--main-green); color: #000; box-shadow: 0 0 10px #0f0; }
-.bomb-btn { background: #800; border-color: #f00; color: #fff; width: 100%; margin-top: 10px;}
+#error-overlay { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: var(--red); display: none; text-shadow: 0 0 15px var(--red); pointer-events: none; }
 
-#op-status { margin-top: 15px; font-size: 11px; background: rgba(0,0,0,0.5); padding: 5px; color: #fff; border-left: 2px solid var(--main-green);}
